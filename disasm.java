@@ -14,23 +14,23 @@ class disasm {
 
       long fileSize = new File(filename).length();
       byte[] allBytes = new byte[(int) fileSize];
-      String str[] = new String[allBytes.length];
+      String str = "";
  
-
       int bytesRead = inputStream.read(allBytes);
       
       for(int i = 0; i < bytesRead; i++) {
-        str[i] = Character.toString(allBytes[i]);
-        System.out.print(str[i]);
-        
-        // if(i % 4 == 0) {
-        //   String bytes[] = new String[4];
-        //   for(int y = 0; y < bytes.length; y++) {
-        //     bytes[y] = str[y];
-        //     System.out.print(bytes[y]);
-        //     // str[y] = null;
-        //   }
-        // }
+        str += Character.toString(allBytes[i]);
+      }
+      str = str.replace(" ", "");
+      System.out.println(str);
+
+      for(int i = 0; i < str.length(); i++) {
+        if(i % 4 == 0 && i != 0) {
+          System.out.println(str.charAt(i));
+          System.out.println(str.charAt(i - 1));
+          System.out.println(str.charAt(i - 2));
+          System.out.println(str.charAt(i - 3));
+        }
       }
       
     } catch (IOException ex) {
