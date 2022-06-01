@@ -50,35 +50,35 @@ class disasm {
           bytes[3] = str.charAt(i - 1);
 
           if(bytes[0].equals('3')) {
-            System.out.print("Add " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("Add " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('4')) {
-            System.out.print("Subt " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("Subt " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('B')) {
-            System.out.print("AddI " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("AddI " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('A')) {
-            System.out.print("Clear");
+            System.out.println("Clear");
           } else if(bytes[0].equals('1')) {
-            System.out.print("Load " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("Load " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('2')) {
-            System.out.print("Store " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("Store " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('5')) {
-            System.out.print("Input");
+            System.out.println("Input");
           } else if(bytes[0].equals('6')) {
-            System.out.print("Output");
+            System.out.println("Output");
           } else if(bytes[0].equals('9')) {
-            System.out.print("Jump " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("Jump " + bytes[1] + bytes[2] + bytes[3] );
           } else if(bytes[0].equals('8')) {
-            System.out.print("Skipcond");
+            System.out.println("Skipcond");
           } else if(bytes[0].equals('0')) {
-            System.out.print("JnS " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("JnS " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('C')) {
-            System.out.print("jumpl " + bytes[1] + bytes[2] + bytes[3] + "\n");
+            System.out.println("jumpl " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('D')) {
-            System.out.print("LoadI");
+            System.out.println("LoadI");
           } else if(bytes[0].equals('E')) {
-            System.out.print("StoreI");
+            System.out.println("StoreI");
           } else if(bytes[0].equals('7')) {
-            System.out.print("Halt");
+            System.out.println("Halt");
           }
         }
       }
