@@ -51,15 +51,15 @@ class disasm {
           } else if(bytes[0].equals('9')) {
             System.out.println("jump " + bytes[1] + bytes[2] + bytes[3] );
           } else if(bytes[0].equals('8')) {
-            System.out.println("skipcond");
+            System.out.println("skipcond " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('0')) {
             System.out.println("jns " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('C')) {
             System.out.println("jumpi " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('D')) {
-            System.out.println("loadi");
+            System.out.println("loadi "  + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('E')) {
-            System.out.println("storei");
+            System.out.println("storei " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('7')) {
             System.out.println("halt");
           }
