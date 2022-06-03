@@ -14,9 +14,8 @@ class disasm {
       String str = "";
  
       while ((byteRead = inputStream.read()) != -1) {
-        if(Integer.toHexString(byteRead).equals("0") || Integer.toHexString(byteRead).equals("1")) {
-          String temp = "0" + Integer.toHexString(byteRead);
-          str += temp;
+        if(Integer.toHexString(byteRead).length() == 1) {
+          str += "0" + Integer.toHexString(byteRead);
         } else {
           str += Integer.toHexString(byteRead);
         }
