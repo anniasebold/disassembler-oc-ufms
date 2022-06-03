@@ -9,17 +9,22 @@ class disasm {
     
     String filename = args[0];
     
-    try ( InputStream inputStream = new FileInputStream(filename); )
-    {
+    try (InputStream inputStream = new FileInputStream(filename)) {
       int byteRead = -1;
       String str = "";
  
       while ((byteRead = inputStream.read()) != -1) {
-        str += (Integer.toHexString(byteRead));
+        if(Integer.toHexString(byteRead).equals("0") || Integer.toHexString(byteRead).equals("1")) {
+          String temp = "0" + Integer.toHexString(byteRead);
+          str += temp;
+        } else {
+          str += Integer.toHexString(byteRead);
+        }
       }
+      
+      str = str.toUpperCase();
 
       Character bytes[] = new Character[4];
-
       for(int i = 0; i <= str.length(); i++) {
         if(i % 4 == 0 && i != 0) {
           bytes[0] = str.charAt(i - 4);
@@ -50,7 +55,7 @@ class disasm {
           } else if(bytes[0].equals('0')) {
             System.out.println("jns " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('C')) {
-            System.out.println("jumpl " + bytes[1] + bytes[2] + bytes[3]);
+            System.out.println("jumpi " + bytes[1] + bytes[2] + bytes[3]);
           } else if(bytes[0].equals('D')) {
             System.out.println("loadi");
           } else if(bytes[0].equals('E')) {
@@ -60,8 +65,6 @@ class disasm {
           }
         }
       }
-      
-      
     } catch (IOException ex) {
       ex.printStackTrace();
     }
