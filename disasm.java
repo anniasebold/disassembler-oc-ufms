@@ -12,54 +12,56 @@ class disasm {
     try (InputStream inputStream = new FileInputStream(filename)) {
       int byteRead = -1;
       String str = "";
+      int cont = 0;
  
       while ((byteRead = inputStream.read()) != -1) {
         if(Integer.toHexString(byteRead).length() == 1) {
-          str += "0" + Integer.toHexString(byteRead);
-        } else {
+          str += '0' + Integer.toHexString(byteRead);
+        } else if(Integer.toHexString(byteRead).length() == 2) {
           str += Integer.toHexString(byteRead);
         }
-      }
-      
-      str = str.toUpperCase();
-
-      Character bytes[] = new Character[4];
-      for(int i = 0; i <= str.length(); i++) {
-        if(i % 4 == 0 && i != 0) {
-          bytes[0] = str.charAt(i - 4);
-          bytes[1] = str.charAt(i - 3);
-          bytes[2] = str.charAt(i - 2);
-          bytes[3] = str.charAt(i - 1);
-
-          if(bytes[0].equals('3')) {
-            System.out.println("add " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('4')) {
-            System.out.println("subt " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('B')) {
-            System.out.println("addi " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('A')) {
+        cont += 2;
+        
+        if(cont % 4 == 0 && cont != 0) {
+          Character opcode = str.charAt(cont - 4);
+          StringBuilder strByte = new StringBuilder(str.substring(cont -3, cont));
+        
+          if(strByte.charAt(0) == '0') {
+            strByte.deleteCharAt(0);
+            if(strByte.charAt(0) == '0') {
+              strByte.deleteCharAt(0);
+            }
+          }
+          
+          if(opcode == '3') {
+            System.out.println("add " + strByte);
+          } else if(opcode == '4') {
+            System.out.println("subt " + strByte);
+          } else if(opcode == 'b') {
+            System.out.println("addi " + strByte);
+          } else if(opcode == 'a') {
             System.out.println("clear");
-          } else if(bytes[0].equals('1')) {
-            System.out.println("load " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('2')) {
-            System.out.println("store " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('5')) {
+          } else if(opcode == '1') {
+            System.out.println("load " + strByte);
+          } else if(opcode == '2') {
+            System.out.println("store " + strByte);
+          } else if(opcode == '5') {
             System.out.println("input");
-          } else if(bytes[0].equals('6')) {
+          } else if(opcode == '6') {
             System.out.println("output");
-          } else if(bytes[0].equals('9')) {
-            System.out.println("jump " + bytes[1] + bytes[2] + bytes[3] );
-          } else if(bytes[0].equals('8')) {
-            System.out.println("skipcond " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('0')) {
-            System.out.println("jns " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('C')) {
-            System.out.println("jumpi " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('D')) {
-            System.out.println("loadi "  + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('E')) {
-            System.out.println("storei " + bytes[1] + bytes[2] + bytes[3]);
-          } else if(bytes[0].equals('7')) {
+          } else if(opcode == '9') {
+            System.out.println("jump " + strByte);
+          } else if(opcode == '8') {
+            System.out.println("skipcond " + strByte);
+          } else if(opcode == '0') {
+            System.out.println("jns " + strByte);
+          } else if(opcode == 'c') {
+            System.out.println("jumpi " + strByte);
+          } else if(opcode == 'd') {
+            System.out.println("loadi " + strByte);
+          } else if(opcode == 'e') {
+            System.out.println("storei " + strByte);
+          } else if(opcode == '7') {
             System.out.println("halt");
           }
         }
